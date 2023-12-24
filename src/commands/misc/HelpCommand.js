@@ -7,7 +7,7 @@ class HelpCommand extends Command {
     super(client, {
       name: 'help',
       aliases: ['h'],
-      description: 'Get a description of all the commands you can use.',
+      description: 'Kullanabileceğiniz tüm komutların açıklamasını alın.',
       emoji: ':question:',
       group: 'misc',
       guildOnly: false
