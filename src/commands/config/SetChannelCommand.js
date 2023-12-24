@@ -7,7 +7,7 @@ class SetChannelCommand extends Command {
     super(client, {
       name: 'setchannel',
       aliases: ['channel'],
-      description: 'Set the channel to which the bot will announce free game offers.',
+      description: 'Botun ücretsiz oyun tekliflerini duyuracağı kanalı ayarlayın.',
       emoji: ':loudspeaker:',
       group: 'config',
       guildOnly: true,
@@ -20,17 +20,17 @@ class SetChannelCommand extends Command {
     const previousChannelID = await this.client.dataProvider.get(message.guild, GUILD_KEYS.channel);
 
     if (previousChannelID === channel.id) {
-      return message.reply('the channel you mentioned is already set as the announcement channel.');
+      return message.reply('bahsettiğiniz kanal zaten duyuru kanalı olarak ayarlanmıştır.');
     }
 
     try {
       await this.client.dataProvider.set(message.guild, GUILD_KEYS.channel, channel.id);
 
-      logger.info(`Announcement channel changed for ${message.guild.name} to #${channel.name}.`);
-      return message.channel.send(`The announcement channel has been changed to ${channel}.`);
+      logger.info(`Duyuru kanalı değiştirildi: ${message.guild.name} to #${channel.name}.`);
+      return message.channel.send(`Duyuru kanalı şu şekilde değiştirildi: ${channel}.`);
     } catch (error) {
       logger.error(error);
-      return message.channel.send('Something happened when trying to update the announcement channel.');
+      return message.channel.send('Duyuru kanalını güncellemeye çalışırken bir hata oldu.');
     }
   }
 
@@ -38,11 +38,11 @@ class SetChannelCommand extends Command {
     const channel = message.mentions.channels.first();
 
     if (!channel) {
-      return message.reply(`you need to mention the channel you wish to set.`);
+      return message.reply(`ayarlamak istediğiniz kanalı belirtmeniz gerekiyor.`);
     }
 
     if (!channel.viewable) {
-      return message.reply(`I cannot see the channel you mentioned, do I have enough permissions to access it?`);
+      return message.reply(`Bahsettiğiniz kanalı göremiyorum, erişim için yeterli iznim var mı?`);
     }
 
     return this.updateChannel(message, channel);

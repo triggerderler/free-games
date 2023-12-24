@@ -6,7 +6,7 @@ class DisableCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'disable',
-      description: 'Disable free game announcements on this server.',
+      description: 'Bu sunucudaki ücretsiz oyun duyurularını devre dışı bırakın.',
       emoji: ':no_entry_sign:',
       group: 'config',
       guildOnly: true,
@@ -19,13 +19,13 @@ class DisableCommand extends Command {
     const currentChannel = await this.client.dataProvider.get(message.guild, GUILD_KEYS.channel, null);
   
     if (!currentChannel) {
-      return message.reply('no announcement channel is currently set.');
+      return message.reply('şu anda ayarlı duyuru kanalı yok.');
     }
 
     await this.client.dataProvider.set(message.guild, GUILD_KEYS.channel, null);
     
-    logger.info(`Announcements have been disabled for ${message.guild.name}.`);
-    return message.channel.send('Announcements have been disabled on this server.');
+    logger.info(`Duyurular şu süre için devre dışı bırakıldı: ${message.guild.name}.`);
+    return message.channel.send('Bu sunucuda duyurular devre dışı bırakıldı.');
   }
 }
 

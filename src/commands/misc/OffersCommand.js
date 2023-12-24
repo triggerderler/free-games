@@ -5,7 +5,7 @@ class OffersCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'offers',
-      description: 'Get the current offers on the supported storefronts.',
+      description: 'Güncel indirimleri listele.',
       emoji: ':moneybag:',
       group: 'misc',
       guildOnly: false
@@ -14,7 +14,7 @@ class OffersCommand extends Command {
 
   prepareMessageForOffer(header, offers) {
     return offers.reduce((message, offer, i) => {
-      return `${message}${i + 1}. ${offer.game} - available at: ${offer.url}\n`;
+      return `${message}${i + 1}. ${offer.game} - platform: ${offer.url}\n`;
     }, `${header}\n\n`);
   }
 
@@ -33,7 +33,7 @@ class OffersCommand extends Command {
         continue;
       }
 
-      message.channel.send(this.prepareMessageForOffer(`Here are the offers available currently for ${provider.name}:`, offers));
+      message.channel.send(this.prepareMessageForOffer(`Şu anda mevcut olan teklifler şunlardır: ${provider.name}:`, offers));
     }
   }
 
